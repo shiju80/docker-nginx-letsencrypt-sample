@@ -37,29 +37,17 @@ services:
     environment:
       - NGINX_DOCKER_GEN_CONTAINER=nginx-gen
 
-  sample-api:
-    restart: always
-    image: sample-api
-    build: ./samples/api
-    container_name: sample-api
-    environment:
-      - VIRTUAL_HOST=sampleapi.example.com
-      - VIRTUAL_NETWORK=nginx-proxy
-      - VIRTUAL_PORT=3000
-      - LETSENCRYPT_HOST=sampleapi.example.com
-      - LETSENCRYPT_EMAIL=email@example.com
-
   sample-website:
     restart: always
-    image: sample-website
+    image: easyrtc-server
     build: ./samples/website
-    container_name: sample-website
+    container_name: easyrtc-server
     volumes:
-      - "./volumes/nginx-sample-website/conf.d/:/etc/nginx/conf.d"
-      - "./volumes/config/sample-website/config.js:/usr/share/nginx/html/config.js"
+      - "./volumes/nginx-easyrtc-server/conf.d/:/etc/nginx/conf.d"
+      - "./volumes/config/easyrtc-server/config.js:/usr/share/nginx/html/config.js"
     environment:
-      - VIRTUAL_HOST=samplewebsite.example.com
+      - VIRTUAL_HOST=evangeltec.com
       - VIRTUAL_NETWORK=nginx-proxy
       - VIRTUAL_PORT=80
-      - LETSENCRYPT_HOST=sample.example.com
-      - LETSENCRYPT_EMAIL=email@example.com
+      - LETSENCRYPT_HOST=evangeltec.com
+      - LETSENCRYPT_EMAIL=evangeltec.com
